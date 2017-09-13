@@ -1,0 +1,35 @@
+<html ng-app="apiApp">
+	<head>
+			<link href='styles.css' rel='stylesheet'>
+			<link href="https://fonts.googleapis.com/css?family=Cutive|Fascinate+Inline|Monoton|Playfair+Display|Sintony" rel="stylesheet">
+	</head>
+	<body ng-controller="ctrl2">
+	<div class='full-container'>
+				<h1  ng-click='hideAgain()'>Travel<br><p style="float:right">Cheap</p></h1>
+			<div class='info-box'>
+					<button type='button' ui-sref='home'>Home</button>
+					
+				<div class='header-text'>
+				<h3>Filter your results by:</h3>
+				</div>
+				
+				<div class='buttons'>
+						<button type='button' ui-sref='exchange'>Exchange Rate</button>
+						<button type='button' ui-sref='ppp'>Big Mac Price</button>
+				</div>
+				
+				<ui-view></ui-view>	
+				
+			</div>
+				<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmEPL1PUyIvflarzeAEbvCi7q9CntWAoQ">
+				</script>
+				<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+				<script src="app.js"></script>
+				<script src="controller.js"></script>
+				<script src="service.js"></script>
+	
+	</div>
+	</body>
+</html>

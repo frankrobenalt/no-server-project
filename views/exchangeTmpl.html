@@ -1,0 +1,24 @@
+<div class='surround'>
+    <div class='buttons'>
+        <button type='button' ng-click="getData(malaysia)">Malaysia</button>
+        <button type='button' ng-click="getData(southAfrica)">South Africa</button>
+        <button type='button' ng-click="getData(peru)">Peru</button>
+        <button type='button' ng-click="getData(mexico)">Mexico</button>
+        <button type='button' ng-click="getData(japan)">Japan</button>
+    </div>	
+        <form ng-submit='getData(searchTerm)'>
+                <input type='text' placeholder="search for a country" ng-model='searchTerm'>	
+        </form>
+
+        <div class='info'>
+            
+            <!-- <div class='words' ng-hide='hide'>
+            {{data.country}}<br>
+            Currency: {{data.currency}}<br>
+            $1000USD = {{total}}
+            </div> -->
+        </div>    
+            <div id='map'></div>
+
+        
+</div>
