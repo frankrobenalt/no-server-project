@@ -1,10 +1,13 @@
 angular.module('apiApp', ['ui.router'])
   .config(function($stateProvider, $urlRouterProvider){
+
+    $urlRouterProvider.otherwise('/');
+
     $stateProvider
     .state('home', {
       url: '/',
       templateUrl: './views/home.html',
-      controller: 'ctrl2'
+
     })
     .state('exchange', {
       url: '/exchange-rate',
@@ -13,7 +16,8 @@ angular.module('apiApp', ['ui.router'])
     })
     .state('ppp', {
       url: '/ppp',
-      templateUrl: './views/pppTmpl.html'
+      templateUrl: './views/pppTmpl.html',
+      controller: 'pppCtrl'
     })
   });;
 

@@ -1,0 +1,29 @@
+<div class='surround'>
+    
+        <div class='reasoning'>
+            Exchange rates won't always provide the best illustration of how much your money is worth. We need to calculate Purchasing Power Parity by comparing the prices of the same goods from country to country. We will use the price of a Big Mac in each country in order to further compare what we will get with our money.
+            <br>These countries currently have the cheapest Big Mac's:
+        </div>
+        <div class='buttons'>
+            <button type='button' ng-click="getData(ukraine)">Ukraine</button>
+            <button type='button' ng-click="getData(egypt)">Egypt</button>
+            <button type='button' ng-click="getData(malaysia)">Malaysia</button>
+            <button type='button' ng-click="getData(southAfrica)">South Africa</button>
+            <button type='button' ng-click="getData(russia)">Russia</button>
+        </div>	
+            <form ng-submit='getData(searchTerm)'>
+                    <input type='text' placeholder="search for a country" ng-model='searchTerm'>	
+            </form>
+    
+            <div class='info'>
+                
+                <!-- <div class='words' ng-hide='hide'>
+                {{data.country}}<br>
+                Currency: {{data.currency}}<br>
+                $1000USD = {{total}}
+                </div> -->
+            </div>    
+                <div id='map'></div>
+    
+            
+    </div>

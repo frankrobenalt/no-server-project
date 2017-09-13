@@ -7,7 +7,7 @@ html {
 }
 #map {
     width: 100%;
-    height: 400px;
+    height: 70%;
     background-color: grey;
   }
 
@@ -71,7 +71,7 @@ input:focus{
     text-align: center;
     width: 60%;
     font-family: 'Cutive', serif;
-   
+   width: 1100px;
 }
 .header-text {
     font-family: 'Sintony', sans-serif;
@@ -87,10 +87,11 @@ input:focus{
     display: flex;
     flex-direction: column;
     align-content: center;
-
+    text-align: center;
 }
-.words-box {
-   
+.reasoning {
+  width: 1100px;
+  margin: auto;
 }
 .words {
     font-size: 2rem;
