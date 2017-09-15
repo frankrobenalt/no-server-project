@@ -7,6 +7,7 @@ angular.module('apiApp', ['ui.router'])
     .state('home', {
       url: '/',
       templateUrl: './views/home.html',
+      controller: 'ctrl2'
 
     })
     .state('exchange', {
@@ -20,5 +21,4 @@ angular.module('apiApp', ['ui.router'])
       controller: 'pppCtrl'
     })
   });;
-
 

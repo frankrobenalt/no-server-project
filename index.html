@@ -2,25 +2,13 @@
 	<head>
 			<link href='styles.css' rel='stylesheet'>
 			<link href="https://fonts.googleapis.com/css?family=Cutive|Fascinate+Inline|Monoton|Playfair+Display|Sintony" rel="stylesheet">
+			<link rel="stylesheet" href="./font-awesome-4.7.0\css\font-awesome.min.css">
 	</head>
 	<body ng-init='initCur()'>
-	<div class='full-container'>
-				<h1  ng-click='hideAgain()'>Travel<br><p style="float:right">Cheap</p></h1>
-			<div class='info-box'>
-					<button type='button' ui-sref='home'>Home</button>
-					
-				<div class='header-text'>
-				<h3>Filter your results by:</h3>
-				</div>
-				
-				<div class='buttons'>
-						<button type='button' ui-sref='exchange'>Exchange Rate</button>
-						<button type='button' ui-sref='ppp'>Big Mac Price</button>
-				</div>
-				
-				<ui-view></ui-view>	
-				
-			</div>
+
+<ui-view></ui-view>
+
+<footer>Site by Frank Robenalt 2017</footer>
 				<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmEPL1PUyIvflarzeAEbvCi7q9CntWAoQ">
 				</script>
@@ -31,6 +19,6 @@
 				<script src="pppCtrl.js"></script>
 				<script src="service.js"></script>
 	
-	</div>
+
 	</body>
 </html>

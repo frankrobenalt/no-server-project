@@ -1,6 +1,32 @@
-<div class='home-text'>
-    <h2>Welcome</h2><br>
-<div>
-    <h3>We have compiled data from around the world in order to show you where you should travel at the lowest cost.</h3>
+<div class='full-container'>
+        <div class='info-box'>  
+                <span class = 'nav'><h1 ng-click='hideAgain()'><a ur-sref='home'>Travel Cheap</a></h1>
+                    <div class = 'top-right'>
+                            <button type='button' ui-sref='home'>Home</button>    
+                            <button type='button' ui-sref='exchange'>Exchange Rate</button>
+                            <button type='button' ui-sref='ppp'>Big Mac Price</button>
+                    </div>
+                </span>
+
+            		
+<button id="myBtn" ng-click='showTut()'>Learn How it Works</button>
+<div class='modal' ng-hide="hide">
+    <div class='modal-content'>
+        <div class='top'>
+        <h2>Welcome</h2>
+        <span class="close"ng-click='closeTut()'>&times;</span>
+        </div>
+        <h6>Our goal is to help you find the cheapest travel destinations.<br>
+        <br>
+        Classical Economic theory says that exchange rates should make your money hold the same value no matter what currency you use.<br>
+        <br>Visit our <button type='button' ui-sref='exchange'>Exchange Rate</button> page for exchange rates.<br>
+        <br>However, exchange rates aren't always accurate. In order to determine real purchasing power, we have converted the price of Big Macs around the world into their US dollar value so that you can see where to travel in order to save the most $$.<br>
+        <br>Visit our <button type='button' ui-sref='ppp'>Big Mac Price</button> page to see how purchasing power works.
+        </h6>
+        <h2>Enjoy</h2>
+        
+        
+    </div>
 </div>
-</div>
+
+

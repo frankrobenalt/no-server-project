@@ -15,6 +15,8 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
         initMapTwo(lat, lng, cont);
       });
 
+      $scope.hideHelpBox = true;
+
     $scope.getData = function(search){
           servy.getData(search).then(function(response){
             $scope.country = response[0].name;
@@ -24,7 +26,7 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
             $scope.content = "<div class='words'>" + $scope.country + "<br>" +
             "U.S Big Mac Price: $5.30<br>" + 
             $scope.country + " Big Mac Price: $" + $scope.bigMac[$scope.country] +
-            "<br>Savings per Big Mac in " + $scope.country + ": $" + (5.30 - parseInt($scope.bigMac[$scope.country])).toFixed(2) + 
+            "<br>Savings per Big Mac in " + $scope.country + ": $" + (5.30 - $scope.bigMac[$scope.country]).toFixed(2) + 
             "</div>";
             
             console.log(($scope.bigMac[$scope.country]));
@@ -33,6 +35,14 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
             });
          $scope.searchTerm = '';
     };
+
+    $scope.showHelp = function(){
+      $scope.hideHelpBox = false;
+    }
+    $scope.hideHelp = function(){
+      $scope.hideHelpBox = true;
+    }
+    
    
 });
 
@@ -153,7 +163,7 @@ function initMapTwo(lat, lng, content) {
 
     var search = {lat: lat, lng: lng};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 3,
+      zoom: 4,
       center: search,
       mapTypeControlOptions: {
         mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',

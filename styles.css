@@ -2,13 +2,17 @@
     margin: 0;
     padding: 0;
 }
-html {
-    background-color: #FB9765;
+body {
+    background-color: #FFD9C7;
+    height: 100%;
 }
 #map {
     width: 100%;
-    height: 70%;
+    height: 60%;
     background-color: grey;
+    position: fixed;
+    bottom: 0px;
+    margin-top: 0px;
   }
 
 /* font-family: 'Monoton', cursive;
@@ -21,8 +25,26 @@ font-family: 'Playfair Display', serif;  */
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 40%;
 }
 
+.nav {
+    display: flex;
+    align-items: center;
+    width:100vw;
+    justify-content: center;
+    background-color: #FB9765;
+}
+.top-right {
+    display: flex;
+    align-items: center;
+    margin-left: 150px;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 button {
         background-color: #FF3DE8; /* Green */
         border: none;
@@ -33,29 +55,26 @@ button {
         display: inline-block;
         font-size: 16px;
         font-family: 'Cutive', serif;
-        margin: 5px;
+        margin: 10px;
 }
 input {
-    background-color: #00DAFE; /* Green */
+    background-color: #FFFFFF; /* Green */
     border: none;
-    color: white;
+    color: black;
     padding: 13px 28px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 5px;
+    margin: 10px;
     height: 50px;
     font-family: 'Cutive', serif;
     width: 240px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    
     
 }
 
-input:focus{
-    width: 40%;
-}
+
 
 .home-text {
     display: flex;
@@ -69,9 +88,9 @@ input:focus{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 60%;
+   
     font-family: 'Cutive', serif;
-   width: 1100px;
+  
 }
 .header-text {
     font-family: 'Sintony', sans-serif;
@@ -88,13 +107,17 @@ input:focus{
     flex-direction: column;
     align-content: center;
     text-align: center;
+    margin: 40px;
 }
 .reasoning {
   width: 1100px;
-  margin: auto;
+  margin: 10px;
+  padding-right: 250px;
+  font-family: 'Cutive', serif;
+  font-size: 20px;  
 }
 .words {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: 'Cutive', serif;
     display: flex;
     flex-direction: column;
@@ -104,7 +127,7 @@ input:focus{
 }
 
 h1 {
-    width: 25%;
+
     font-family: 'Fascinate Inline', cursive;
     font-size: 69px;
     margin: 10px;
@@ -125,6 +148,80 @@ h2 {
     background: -webkit-linear-gradient(#00DAFE, #FF3DE8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+h6 {
+    font-size: 20px;
+}
+
+#myBtn {
+    position: fixed;
+    bottom: 50%;
+    
+}
+
+/* The Modal (background) */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 60px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-right: -10%;
+    padding-left: 10%;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    font-family: 'Cutive', serif;
+    font-size: 15px;    
+    background-color: white;
 }
 
 @media (max-width : 1100px) {

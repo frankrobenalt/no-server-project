@@ -1,8 +1,17 @@
+<div class='full-container'>
+        <span class = 'nav'><h1 ng-click='hideAgain()'>Travel Cheap</h1>
+            <div class = 'top-right'>
+                    <button type='button' ui-sref='home'>Home</button>    
+                    <button type='button' ui-sref='exchange'>Exchange Rate</button>
+                    <button type='button' ui-sref='ppp'>Big Mac Price</button>
+            </div>
+        </span
+       
+    </div>
 <div class='surround'>
     
         <div class='reasoning'>
-            Exchange rates won't always provide the best illustration of how much your money is worth. We need to calculate Purchasing Power Parity by comparing the prices of the same goods from country to country. We will use the price of a Big Mac in each country in order to further compare what we will get with our money.
-            <br>These countries currently have the cheapest Big Mac's:
+           These countries currently have the cheapest Big Mac's:
         </div>
         <div class='buttons'>
             <button type='button' ng-click="getData(ukraine)">Ukraine</button>
@@ -10,20 +19,35 @@
             <button type='button' ng-click="getData(malaysia)">Malaysia</button>
             <button type='button' ng-click="getData(southAfrica)">South Africa</button>
             <button type='button' ng-click="getData(russia)">Russia</button>
-        </div>	
             <form ng-submit='getData(searchTerm)'>
                     <input type='text' placeholder="search for a country" ng-model='searchTerm'>	
             </form>
-    
-            <div class='info'>
+            <button ng-click='showHelp()'><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></button>
+            
+        </div>	
+
                 
-                <!-- <div class='words' ng-hide='hide'>
-                {{data.country}}<br>
-                Currency: {{data.currency}}<br>
-                $1000USD = {{total}}
-                </div> -->
-            </div>    
-                <div id='map'></div>
     
             
+    </div>
+    
+</div><div id='map'></div>
+
+<div class='modal' ng-hide="hideHelpBox">
+        <div class='modal-content'>
+            <div class='top'>
+            <h2>Purchasing Power Parity</h2>
+            <span class="close"ng-click='hideHelp()'>&times;</span>
+            </div>
+            <h6>Our goal is to help you find the cheapest travel destinations.<br>
+            <br>
+            Classical Economic theory says that exchange rates should make your money hold the same value no matter what currency you use.<br>
+            <br>Visit our <button type='button' ui-sref='exchange'>Exchange Rate</button> page for exchange rates.<br>
+            <br>However, exchange rates aren't always accurate. In order to determine real purchasing power, we have converted the price of Big Macs around the world into their US dollar value so that you can see where to travel in order to save the most $$.<br>
+            <br>Visit our <button type='button' ui-sref='ppp'>Big Mac Price</button> page to see how purchasing power works.
+            </h6>
+            <h2>Enjoy</h2>
+            
+            
+        </div>
     </div>
