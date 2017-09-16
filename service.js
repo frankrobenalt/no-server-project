@@ -9,10 +9,17 @@ angular.module('apiApp').service('servy', function($http){
       };
     
     this.getCurrency = function(){
-        return $http.get("http://api.fixer.io/latest?base=USD")
+        return $http.get("http://www.apilayer.net/api/live?access_key=eb9d4a0195390ab516467ad357ca4014")
         .then(function(response){
             return response.data;
         })
+    }
+
+    this.getInfo = function(){
+        return $http.get("https://restcountries-v1.p.mashape.com/all/?mashape-key=4BQ7Mb2NUZmshWPDaG3fNcevzxjGp1wVXcQjsnbp85E8Cqeyf0")
+        .then(function(response){
+            return response.data;
+        });
     }
 
     this.bigMac = bigMac;

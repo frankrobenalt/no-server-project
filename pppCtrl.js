@@ -6,6 +6,7 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
     $scope.southAfrica = 'south africa';
     $scope.russia = 'russia';
 
+
     angular.element(document).ready(function(){
         var lat = 39.758808;
         var lng = -101.908424;
@@ -15,21 +16,75 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
         initMapTwo(lat, lng, cont);
       });
 
-      $scope.hideHelpBox = true;
+
+      $scope.hideHelpBox = false;
+
+
+      var tableData = [
+      ];
+      var newSearch = [];
+      $scope.getInfo = function(){
+        servy.getInfo()
+        .then(function(response){
+            for (var i=0; i<response.length; i++){
+                tableData.push([response[i].name]);
+                }
+      
+            servy.getCurrency()
+        .then(function(response){
+        var currency = response.quotes;
+        
+        for (var j = 0; j<tableData.length; j++){
+            // console.log(tableData[j][1]);
+            // console.log(currency['USD' + tableData[j][1]]);
+            
+            if (!bigMac[tableData[j][0]]) {
+                tableData.splice(tableData.indexOf(tableData[j]), 1);
+                j--;
+            } else {
+                tableData[j].push(bigMac[tableData[j][0]], (-(100 * (5.30-bigMac[tableData[j][0]])/ 5.30).toFixed(2)) + '%');
+            }
+        } 
+      angular.element(document).ready(function(){
+        
+          $('#table').DataTable( {
+            data: tableData,
+            columns: [
+                { title: "Country" },
+                { title: "Big Mac Price"},
+                { title: "Currency Valuation"}
+            ],
+            "order": [[ 2, "asc" ]]
+          } );
+          $('#table tbody').on('click', 'tr', function () {
+            newSearch.push(this.firstChild.textContent);
+            $scope.getData(newSearch);
+            newSearch = [];
+        } );
+      })
+      
+      })
+
 
     $scope.getData = function(search){
           servy.getData(search).then(function(response){
             $scope.country = response[0].name;
             $scope.currency = response[0].currencies[0];
+            $scope.difference = (5.30 - $scope.bigMac[$scope.country]).toFixed(2);
            
-
+            if ($scope.difference < 0){
             $scope.content = "<div class='words'>" + $scope.country + "<br>" +
             "U.S Big Mac Price: $5.30<br>" + 
             $scope.country + " Big Mac Price: $" + $scope.bigMac[$scope.country] +
-            "<br>Savings per Big Mac in " + $scope.country + ": $" + (5.30 - $scope.bigMac[$scope.country]).toFixed(2) + 
-            "</div>";
-            
-            console.log(($scope.bigMac[$scope.country]));
+            "<br>Price Difference: <div class='red'>$" + $scope.difference + 
+            "</div></div>";
+           } else {
+            $scope.content = "<div class='words'>" + $scope.country + "<br>" +
+            "U.S Big Mac Price: $5.30<br>" + 
+            $scope.country + " Big Mac Price: $" + $scope.bigMac[$scope.country] +
+            "<br>Price Difference: <div class='green'>$" + $scope.difference + 
+            "</div></div>";
+           }
             initMapTwo(response[0].latlng[0], response[0].latlng[1], $scope.content);
 
             });
@@ -45,7 +100,7 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
     
    
 });
-
+}
 function initMapTwo(lat, lng, content) {
 
     var styledMapType = new google.maps.StyledMapType(
@@ -162,9 +217,10 @@ function initMapTwo(lat, lng, content) {
         {name: 'Styled Map'});
 
     var search = {lat: lat, lng: lng};
+    var center = {lat: lat, lng: lng + 25};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
-      center: search,
+      center: center,
       mapTypeControlOptions: {
         mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
                 'styled_map']
@@ -185,7 +241,9 @@ function initMapTwo(lat, lng, content) {
       map: map
     });
     map.addListener('tilesloaded', function(){
-      console.log('idle');
         infowindow.open(map, marker);
     });
 };
+      })
+    
+  

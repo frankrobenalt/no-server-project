@@ -1,16 +1,7 @@
-<div class='full-container'>
-        <span class = 'nav'><h1 ng-click='hideAgain()'>Travel Cheap</h1>
-            <div class = 'top-right'>
-                    <button type='button' ui-sref='home'>Home</button>    
-                    <button type='button' ui-sref='exchange'>Exchange Rate</button>
-                    <button type='button' ui-sref='ppp'>Big Mac Price</button>
-            </div>
-        </span
-       
-    </div>
-<div class='surround'>
+<!-- <div id = 'cursor'>
+<div class='surround'> -->
     
-        <div class='reasoning'>
+        <!-- <div class='reasoning'>
            These countries currently have the cheapest Big Mac's:
         </div>
         <div class='buttons'>
@@ -24,30 +15,20 @@
             </form>
             <button ng-click='showHelp()'><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></button>
             
-        </div>	
+        </div>	 -->
 
                 
     
             
-    </div>
+    <!-- </div> -->
     
-</div><div id='map'></div>
+<div id='map'></div>
 
-<div class='modal' ng-hide="hideHelpBox">
-        <div class='modal-content'>
-            <div class='top'>
-            <h2>Purchasing Power Parity</h2>
-            <span class="close"ng-click='hideHelp()'>&times;</span>
-            </div>
-            <h6>Our goal is to help you find the cheapest travel destinations.<br>
-            <br>
-            Classical Economic theory says that exchange rates should make your money hold the same value no matter what currency you use.<br>
-            <br>Visit our <button type='button' ui-sref='exchange'>Exchange Rate</button> page for exchange rates.<br>
-            <br>However, exchange rates aren't always accurate. In order to determine real purchasing power, we have converted the price of Big Macs around the world into their US dollar value so that you can see where to travel in order to save the most $$.<br>
-            <br>Visit our <button type='button' ui-sref='ppp'>Big Mac Price</button> page to see how purchasing power works.
-            </h6>
-            <h2>Enjoy</h2>
+<div class='modalBigMac' ng-hide="hideHelpBox" ng-init="getInfo()">
+        <div class='modalBigMac-content'>
             
+                <div class="wrapper"><table id="table" class="display" cellspacing="5" width="100%"></table></div>                
             
         </div>
     </div>
+<!-- </div> -->

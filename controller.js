@@ -6,8 +6,8 @@ $scope.thailand = 'thailand';
 $scope.japan = 'japan';
 
 
-
 angular.element(document).ready(function(){
+
   var lat = 39.758808;
   var lng = -101.908424;
   var cont = "<div class='words'>United States" + "<br>" +
@@ -15,22 +15,71 @@ angular.element(document).ready(function(){
   "1,000 USD = 1,000 USD" +
   "</div>";
   initMap(lat, lng, cont);
+
 })
 
 
 $scope.hide = true;
 $scope.hideHelpBox = true;
-$scope.initCur = function(){
-  servy.getCurrency().then(function(response){
-    $scope.curr = response.rates;
+$scope.hideTableBox = false;
+
+
+var tableData = [
+];
+var newSearch = [];
+$scope.getInfo = function(){
+  servy.getInfo()
+  .then(function(response){
+      for (var i=0; i<response.length; i++){
+          tableData.push([response[i].name, response[i].currencies[0]]);
+          }
+
+      servy.getCurrency()
+  .then(function(response){
+  var currency = response.quotes;
+  
+  for (var j = 0; j<tableData.length; j++){
+      // console.log(tableData[j][1]);
+      // console.log(currency['USD' + tableData[j][1]]);
+      
+      if (!currency['USD' + tableData[j][1]] || !bigMac[tableData[j][0]]) {
+          tableData.splice(tableData.indexOf(tableData[j]), 1);
+          j--;
+      } else {
+          tableData[j].push((currency['USD' + tableData[j][1]]).toString(), bigMac[tableData[j][0]], (-(100 * (5.30-bigMac[tableData[j][0]])/ 5.30).toFixed(2)) + '%');
+      }
+  } 
+angular.element(document).ready(function(){
+  
+    $('#table').DataTable( {
+      data: tableData,
+      columns: [
+          { title: "Country" },
+          { title: "Currency" },
+          { title: "Exchange Rate"}
+      ],
+      "order": [[ 2, "desc" ]]
+    } );
+    $('#table tbody').on('click', 'tr', function () {
+      console.log(this);
+      newSearch.push(this.firstChild.textContent);
+      console.log(newSearch);
+      $scope.getData(newSearch);
+      newSearch = [];
+  } );
+})
+
+})
+  
+
+
   });
-};
+
+  }
 
 
 $scope.getData = function(search) {
       
-    
-
       servy.getData(search)
       
       .then(function(response){
@@ -49,18 +98,21 @@ $scope.getData = function(search) {
         
         .then(function(response){
         
-                $scope.currency = response.rates;
-                console.log(response);
+                $scope.currency = response.quotes;
                 
-                if (!$scope.currency[$scope.data.currency]){
+                if (!$scope.currency['USD' + $scope.data.currency]){
                   $scope.total = '1,000 USD'
                 } else {
-                  $scope.total = Math.floor(1000 * ($scope.currency[$scope.data.currency])) + ' ' + $scope.data.currency; 
+                  $scope.total = Math.floor(1000 * $scope.currency['USD' + $scope.data.currency]); 
                 }
+                if ($scope.total > 999){
+                  $scope.total = $scope.total.toLocaleString();
+                }
+
                 $scope.content = "<div class='words'>" +
                 $scope.data.country + "<br>" +
                 "Currency: " + $scope.data.currency + "<br>" + 
-                "1,000 USD = " + $scope.total +
+                "1,000 USD = " + $scope.total + ' ' + $scope.data.currency + 
                 "</div>";
       
 
@@ -84,6 +136,12 @@ $scope.showHelp = function(){
 }
 $scope.hideHelp = function(){
   $scope.hideHelpBox = true;
+}
+$scope.showTable = function(){
+  $scope.hideTableBox = true;
+}
+$scope.hideTable = function(){
+  $scope.hideTableBox = true;
 }
 
 });
@@ -204,9 +262,10 @@ function initMap(lat, lng, content) {
     {name: 'Styled Map'});
 
   var search = {lat: lat, lng: lng};
+  var center = {lat: lat, lng: lng + 25};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: search,
+    center: center,
 
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',

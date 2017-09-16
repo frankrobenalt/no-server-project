@@ -1,18 +1,10 @@
-<div class='full-container'>
-        <span class = 'nav'><h1 ng-click='hideAgain()'>Travel Cheap</h1>
-            <div class = 'top-right'>
-                    <button type='button' ui-sref='home'>Home</button>    
-                    <button type='button' ui-sref='exchange'>Exchange Rate</button>
-                    <button type='button' ui-sref='ppp'>Big Mac Price</button>
-            </div>
-        </span>
-    <div class='info-box'>
+
             
-<div class='surround'>
-    <div class='reasoning'>
+<!-- <div class='surround' ng-init="getInfo()"> -->
+    <!-- <div class='reasoning'>
         These countries currently have some of the highest exchange rates:
-    </div>
-    <div class='buttons'>
+    </div> -->
+    <!-- <div class='buttons'>
         
         <button type='button' ng-click="getData(indonesia)">Indonesia</button>
         <button type='button' ng-click="getData(southAfrica)">South Africa</button>
@@ -22,17 +14,17 @@
         <form ng-submit='getData(searchTerm)'>
                 <input type='text' placeholder="search for a country" ng-model='searchTerm'>	
         </form>
-        <button ng-click='showHelp()'><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></button>
+        <button ng-click='showTable()'><i class="fa fa-list-ul fa-2x" aria-hidden="true"></i></button>
         
-    </div>            
+
+    </div>             -->
     
         
-    </div>
-</div>
-</div>
+    <!-- </div> -->
+
 <div id='map'></div>
 
-<div class='modal' ng-hide="hideHelpBox">
+<div class='modal' ng-hide="hideHelpBox" ng-init="getInfo()">
     <div class='modal-content'>
         <div class='top'>
         <h2>Exchange Rates</h2>
@@ -50,3 +42,11 @@
         
     </div>
 </div>
+
+<div class='modalTable' ng-hide="hideTableBox">
+        <div class='modalTable-content'>
+                <!-- <span class="closetable"ng-click='hideTable()'>&times;</span> -->
+            <div class="wrapper2"><table id="table" class="display" cellspacing="5" width="100%"></table></div>                
+            
+        </div>
+    </div>

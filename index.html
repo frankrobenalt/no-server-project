@@ -3,22 +3,48 @@
 			<link href='styles.css' rel='stylesheet'>
 			<link href="https://fonts.googleapis.com/css?family=Cutive|Fascinate+Inline|Monoton|Playfair+Display|Sintony" rel="stylesheet">
 			<link rel="stylesheet" href="./font-awesome-4.7.0\css\font-awesome.min.css">
+			<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 	</head>
-	<body ng-init='initCur()'>
+	<body>
+
+			<span class = 'nav'><h1 ng-click='hideAgain()'><a ur-sref='home'>Travel Cheap</a></h1>
+				<div class = 'top-right'>
+						<button type='button' ui-sref='home'>Home</button>    
+						<button type='button' ui-sref='exchange'>Exchange Rate Map</button>
+						<button type='button' ui-sref='ppp'>Big Mac Map</button>
+						<button ng-click='showHelp()'><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></button>
+						
+				</div>
+			</span>
 
 <ui-view></ui-view>
 
+
+ 
+</table>
+
 <footer>Site by Frank Robenalt 2017</footer>
+<script
+src="https://code.jquery.com/jquery-3.2.1.js"
+integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+crossorigin="anonymous"></script>				
+<script
+				src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"
+				></script>
+			
 				<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmEPL1PUyIvflarzeAEbvCi7q9CntWAoQ">
 				</script>
 				<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 				<script src="app.js"></script>
+				
+				
 				<script src="controller.js"></script>
+				<script src="homeCtrl.js"></script>
 				<script src="pppCtrl.js"></script>
 				<script src="service.js"></script>
-	
+				
 
 	</body>
 </html>
