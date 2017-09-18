@@ -9,7 +9,7 @@ angular.module('apiApp').service('servy', function($http){
       };
     
     this.getCurrency = function(){
-        return $http.get("https://www.apilayer.net/api/live?access_key=eb9d4a0195390ab516467ad357ca4014")
+        return $http.get("http://www.apilayer.net/api/live?access_key=eb9d4a0195390ab516467ad357ca4014")
         .then(function(response){
             return response.data;
         })
