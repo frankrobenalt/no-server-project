@@ -20,7 +20,7 @@ angular.module('apiApp').controller('homeCtrl', function($scope, servy){
         var currency = response.quotes;
         
         for (var j = 0; j<tableData.length; j++){
-            // console.log(tableData[j][1]);
+            console.log(tableData[j][1]);
             // console.log(currency['USD' + tableData[j][1]]);
             
             if (!currency['USD' + tableData[j][1]] || !bigMac[tableData[j][0]]) {
