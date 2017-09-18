@@ -18,6 +18,7 @@ angular.module('apiApp').controller('homeCtrl', function($scope, servy){
             servy.getCurrency()
         .then(function(response){
         var currency = response.quotes;
+        console.log(currency);
         
         for (var j = 0; j<tableData.length; j++){
             console.log(tableData[j][1]);
