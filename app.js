@@ -6,18 +6,18 @@ angular.module('apiApp', ['ui.router'])
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: './views/home.html',
+      templateUrl: '/views/home.html',
       controller: 'homeCtrl'
 
     })
     .state('exchange', {
       url: '/exchange-rate',
-      templateUrl: './views/exchangeTmpl.html',
+      templateUrl: '/views/exchangeTmpl.html',
       controller: 'ctrl2'
     })
     .state('ppp', {
       url: '/ppp',
-      templateUrl: './views/pppTmpl.html',
+      templateUrl: '/views/pppTmpl.html',
       controller: 'pppCtrl'
     })
   });;
