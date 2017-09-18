@@ -24,11 +24,38 @@
     
 <div id='map'></div>
 
-<div class='modalBigMac' ng-hide="hideHelpBox" ng-init="getInfo()">
+
+<div class='modalBigMac' ng-init="getInfo()">
         <div class='modalBigMac-content'>
-            
-                <div class="wrapper"><table id="table" class="display" cellspacing="5" width="100%"></table></div>                
+                <div class='random'  ng-click='getData(randomSearch())'><button><i class="fa fa-random" aria-hidden="true"></i></button></div>
+                <div class='w' ng-click='toggleWeather()'><button class='weatherButton'><i class='fa fa-sun-o fa-2x' aria-hidden='true'></i></button></div>      
+                <div ng-hide="timeout" class="wrapper2">
+                    <table id="table"  class="display" cellspacing="5" width="100%"></table></div>                
             
         </div>
     </div>
 <!-- </div> -->
+<div class='weather' ng-show="showWeather">
+        <div class='weatherTitle'>{{country}}</div>
+        <div class='weatherMiddle'>
+            <div class='weatherImage'><img src="{{weather.pic}}"></div>
+            <div class='weatherText'>
+            <div>Temp<br>{{weather.temp}}&#8457<br></div>
+            <div>Feels Like<br>{{weather.feelsLike}}&#8457</div>
+            </div>
+            
+        </div>
+        <div class='description'>
+                {{weather.description}}
+        </div>
+    </div>
+
+    <svg ng-hide="afterTimeout" xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 300 300">
+        <style>
+          .bun{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;} .middle{fill:none;stroke:#000000;stroke-miterlimit:10;}
+        </style>
+        <path d="M149.5 21c34.6 0 67.1 13.5 91.6 37.9s37.9 57 37.9 91.6c0 34.6-13.5 67.1-37.9 91.6-24.5 24.5-57 37.9-91.6 37.9s-67.1-13.5-91.6-37.9c-24.5-24.5-37.9-57-37.9-91.6 0-34.6 13.5-67.1 37.9-91.6s57-37.9 91.6-37.9m0-1C77.4 20 19 78.4 19 150.5S77.4 281 149.5 281 280 222.6 280 150.5 221.6 20 149.5 20z"/>
+        <path class="bun" d="M53.5 128.8S69.1 53.1 149.7 54c80.6.9 95.3 74.8 95.3 74.8H53.5z"/>
+        <path class="middle" d="M234 176H64.5c-6 0-11-5.1-11-11.4 0-6.3 4.9-11.4 11-11.4h99.4l20.2 16.1 17.4-16.1H234c6 0 11 5.1 11 11.4 0 6.3-4.9 11.4-11 11.4zM243.6 141.1c-13.1-2.4-26.2.4-39.5 3.9-2.6.8-5.2 1.5-7.8 2.1-5.2 1.3-10.5 2.2-16.1 2.3-3 0-6-.1-9-.4-9-.6-18-2-27.1-4-3.1-.3-6.2-.6-9.3-.8-2.4.3-4.9.8-7.3 1.6-2.8.5-5.6 1-8.5 1.4-22.3 2.7-42-9.4-64.4-9.4 5.6-2.8 11.2-3.7 16.8-2.8 16.8 2.8 32.7 5.6 49.7 3.3 3.2-.4 6.4-.7 9.6-1.1 2.3-.2 4.5-.3 6.8-.3 9.6 1.6 19.3 2.7 29 3.3 3.2.2 6.5.4 9.7.5 7.4.4 14.9-.8 22.3-2.4 2.5-.5 5-1.1 7.5-1.6 11.2-2.7 24.3-2.7 34.2 2.5 2.3.9 3.5 1.5 3.4 1.9z"/>
+        <path class="bun" d="M234.8 221H66.5c-6.5 0-15.1-39.2-8.7-39.2h181.8c6.5 0 1.7 39.2-4.8 39.2z"/>
+      </svg>

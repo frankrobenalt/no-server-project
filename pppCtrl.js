@@ -1,10 +1,8 @@
-angular.module('apiApp').controller('pppCtrl', function($scope, servy){
+angular.module('apiApp').controller('pppCtrl', function($scope, $timeout, servy){
     $scope.bigMac = servy.bigMac;
-    $scope.ukraine = 'ukraine';
-    $scope.egypt = 'egypt';
-    $scope.malaysia = 'malaysia';
-    $scope.southAfrica = 'south africa';
-    $scope.russia = 'russia';
+
+
+
 
 
     angular.element(document).ready(function(){
@@ -16,18 +14,37 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
         initMapTwo(lat, lng, cont);
       });
 
+      $scope.timeout = true;
 
+      $timeout(function(){
+        $scope.timeout = false;
+        $scope.afterTimeout = true;
+      }, 4000);
+      
       $scope.hideHelpBox = false;
-
-
-      var tableData = [
-      ];
+      
+      $scope.toggleWeather = function(){
+        if ($scope.showWeather == true) {
+          $scope.showWeather = false;
+        } else {
+        $scope.showWeather = true;
+      }
+      }
+      
+      $scope.names=[];
+      $scope.randomSearch = function(){
+        return $scope.names[Math.floor(Math.random() * 47)];
+      }
+      console.log($scope.names);
+      var tableData = [];
       var newSearch = [];
+
       $scope.getInfo = function(){
         servy.getInfo()
         .then(function(response){
             for (var i=0; i<response.length; i++){
                 tableData.push([response[i].name]);
+               
                 }
       
             servy.getCurrency()
@@ -43,8 +60,9 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
                 j--;
             } else {
                 tableData[j].push(bigMac[tableData[j][0]], (-(100 * (5.30-bigMac[tableData[j][0]])/ 5.30).toFixed(2)) + '%');
+                $scope.names.push(tableData[j][0]);
             }
-        } 
+        }
       angular.element(document).ready(function(){
         
           $('#table').DataTable( {
@@ -64,9 +82,8 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
       })
       
       })
-
-
-    $scope.getData = function(search){
+      
+      $scope.getData = function(search){
           servy.getData(search).then(function(response){
             $scope.country = response[0].name;
             $scope.currency = response[0].currencies[0];
@@ -85,11 +102,26 @@ angular.module('apiApp').controller('pppCtrl', function($scope, servy){
             "<br>Price Difference: <div class='green'>$" + $scope.difference + 
             "</div></div>";
            }
-            initMapTwo(response[0].latlng[0], response[0].latlng[1], $scope.content);
+           initMapTwo(response[0].latlng[0], response[0].latlng[1], $scope.content);
+
+          servy.getWeather(response[0].latlng[0], response[0].latlng[1])
+           
+                       .then(function(response){
+                         
+                         $scope.weather = {
+                           feelsLike: response.FeelsLikeF,
+                           temp: response.temp_F,
+                           description: response.weatherDesc[0].value,
+                           pic: response.weatherIconUrl[0].value
+                         }
+                         
+
+           
 
             });
          $scope.searchTerm = '';
-    };
+          })
+        };
 
     $scope.showHelp = function(){
       $scope.hideHelpBox = false;
@@ -217,7 +249,7 @@ function initMapTwo(lat, lng, content) {
         {name: 'Styled Map'});
 
     var search = {lat: lat, lng: lng};
-    var center = {lat: lat, lng: lng + 25};
+    var center = {lat: lat, lng: lng + 30};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
       center: center,

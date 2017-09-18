@@ -22,6 +22,15 @@ angular.module('apiApp').service('servy', function($http){
         });
     }
 
+    this.getWeather = function(lat, lng){
+        return $http.get("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=2a0d3ef4b76045b381e205225171609&q=" + lat + "," + lng + "&format=json")
+        .then(function(response){
+            //console.log(response);
+            this.data = response.data.data.current_condition[0];
+            return this.data;
+        });
+    }
+
     this.bigMac = bigMac;
 
 });

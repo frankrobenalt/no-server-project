@@ -24,18 +24,18 @@
 
 <div id='map'></div>
 
-<div class='modal' ng-hide="hideHelpBox" ng-init="getInfo()">
+<div class='modal' ng-show="show">
     <div class='modal-content'>
         <div class='top'>
-        <h2>Exchange Rates</h2>
-        <span class="close"ng-click='hideHelp()'>&times;</span>
+        <h2>Welcome</h2>
+        <span class="close"ng-click='closeTut()'>&times;</span>
         </div>
         <h6>Our goal is to help you find the cheapest travel destinations.<br>
         <br>
         Classical Economic theory says that exchange rates should make your money hold the same value no matter what currency you use.<br>
-        <br>Visit our <button type='button' ui-sref='exchange'>Exchange Rate</button> page for exchange rates.<br>
+        <br>Visit our <button type='button' ui-sref='exchange'>Exchange Rate Map</button> page for exchange rates.<br>
         <br>However, exchange rates aren't always accurate. In order to determine real purchasing power, we have converted the price of Big Macs around the world into their US dollar value so that you can see where to travel in order to save the most $$.<br>
-        <br>Visit our <button type='button' ui-sref='ppp'>Big Mac Price</button> page to see how purchasing power works.
+        <br>Visit our <button type='button' ui-sref='ppp'>Big Mac Map</button> page to see how purchasing power works.
         </h6>
         <h2>Enjoy</h2>
         
@@ -43,10 +43,34 @@
     </div>
 </div>
 
-<div class='modalTable' ng-hide="hideTableBox">
+<div class='modalTable'  ng-init="getInfo()">
         <div class='modalTable-content'>
                 <!-- <span class="closetable"ng-click='hideTable()'>&times;</span> -->
-            <div class="wrapper2"><table id="table" class="display" cellspacing="5" width="100%"></table></div>                
+                <div class='random'  ng-click='getData(randomSearch())'><button><i class="fa fa-random" aria-hidden="true"></i></button></div> 
+                <div class='w' ng-click='toggleWeather()'><button class='weatherButton'><i class='fa fa-sun-o fa-2x' aria-hidden='true'></i></button></div>               
+            <div class="wrapper2" ng-hide="timeout"><table id="table" class="display" cellspacing="5" width="100%"></table></div>                
             
         </div>
     </div>
+
+    <div class='weather' ng-show="showWeather">
+        <div class='weatherTitle'>{{data.country}}</div>
+        <div class='weatherMiddle'>
+            <div class='weatherImage'><img src="{{weather.pic}}"></div>
+            <div class='weatherText'>
+            <div>Temp<br>{{weather.temp}}&#8457<br></div>
+            <div>Feels Like<br>{{weather.feelsLike}}&#8457</div>
+            </div>
+            
+        </div>
+        <div class='description'>
+                {{weather.description}}
+        </div>
+    </div>
+
+
+
+    <svg ng-hide="afterTimeout" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197 195">
+        <path d="M98 15c45.2 0 82 36.8 82 82s-36.8 82-82 82-82-36.8-82-82 36.8-82 82-82m0-1c-45.8 0-83 37.2-83 83s37.2 83 83 83 83-37.2 83-83-37.2-83-83-83z"/>
+        <path class="money" d="M100.4 89.1c0 1 .5 1.7 1.5 2.1 1.7.7 3.9 1.5 6.6 2.4 4.3 1.4 8.2 3.3 11.6 5.7 3.4 2.4 6.2 5.4 8.3 8.9 2.1 3.5 3.1 7.3 3.1 11.3 0 7.9-2.5 13.9-7.6 18.2-5 4.3-12.4 6.6-22.1 7.1-.5 0-.8.1-1 .4-.2.3-.3.8-.3 1.6v10.3c0 .7-.3 1.4-.8 1.9-.6.6-1.2.8-1.9.8-1.7 0-2.5-.9-2.5-2.8v-10.3c0-1.3-.4-2-1-2-6.2-.3-11.8-1.4-16.8-3.1-5-1.7-7.5-3.5-7.5-5.4 0-.6 0-1.5.1-2.6.1-2.2.1-4.5.1-7 0-1-.2-2.7-.7-5-.4-1.9-.6-3.3-.6-4.1 0-1.6.8-2.5 2.3-2.5 1.2 0 2.4 2.3 3.6 7 1.3 4.9 3.2 8.4 5.9 10.7 2.6 2.2 5.4 3.8 8.3 4.7 2.9.9 4.7 1.4 5.5 1.4.5 0 .7-.7.7-2.2v-35.4c0-.9-.4-1.6-1.3-1.9-16.7-6.4-25-15.5-25-27.3 0-5.9 2.3-11 7-15.2 4.6-4.2 10.5-6.6 17.6-7.2.7-.1 1.2-.2 1.4-.4.2-.2.4-.6.4-1.2l.4-6.1c.1-1.6.8-2.4 2-2.4.8 0 1.4.2 1.9.7.5.5.7 1 .7 1.7V48c0 .9.5 1.4 1.5 1.5 5.3.3 9.9 1.2 13.7 2.6 3.8 1.4 5.8 3.1 5.8 5.2 0 .5-.1 1.2-.3 2.1-.2.9-.3 1.6-.3 2.1 0 .4.2 1.1.5 2.1.6 2.2.9 4.5.9 6.6 0 1.2-.6 1.9-1.8 1.9-.7 0-1.3-.3-2-1-.6-.6-1-1.4-1.2-2.2-.9-5-2.8-8.5-5.7-10.6s-6.1-3.2-9.5-3.2c-.6 0-1 .1-1.2.3-.2.2-.3.6-.3 1.4v32.3zm-5.1-2.8V56.7c0-.9-.3-1.3-.9-1.3-1.2 0-3.1.5-5.8 1.6-2.7 1.1-4.9 2.8-6.5 5.3-1.6 2.5-2.4 5.4-2.4 8.7 0 4.9 2.2 8.9 6.7 11.9s7.2 4.5 8.2 4.5c.5.1.7-.3.7-1.1zm5.3 50.7c0 .9 0 1.4.1 1.7 0 .3.2.5.5.5 1.3 0 3.8-.5 7.3-1.6 3.6-1.1 6.5-2.9 8.9-5.6 2.4-2.6 3.5-5.9 3.5-9.9 0-3.7-1.1-6.9-3.4-9.7-2.3-2.8-5.4-5.1-9.4-7-4-1.9-6.3-2.8-6.9-2.8-.4 0-.5.3-.5 1V137z"/>
+    </svg>

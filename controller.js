@@ -1,29 +1,46 @@
-angular.module('apiApp').controller('ctrl2', function($scope, servy){
-$scope.indonesia = 'indonesia';
-$scope.southAfrica = 'south africa';
-$scope.southkorea = 'south korea';
-$scope.thailand = 'thailand';
-$scope.japan = 'japan';
+angular.module('apiApp').controller('ctrl2', function($scope, $timeout, servy){
+
+
+
+
+
+
 
 
 angular.element(document).ready(function(){
 
-  var lat = 39.758808;
-  var lng = -101.908424;
-  var cont = "<div class='words'>United States" + "<br>" +
-  "Currency: USD" + "<br>" + 
-  "1,000 USD = 1,000 USD" +
-  "</div>";
-  initMap(lat, lng, cont);
+    var lat = 39.758808;
+    var lng = -101.908424;
+    var cont = "<div class='words'>United States" + "<br>" +
+    "Currency: USD" + "<br>" + 
+    "1,000 USD = 1,000 USD" +
+    "</div>";
+    initMap(lat, lng, cont);
 
 })
-
-
-$scope.hide = true;
+$scope.show = false;
 $scope.hideHelpBox = true;
 $scope.hideTableBox = false;
+$scope.timeout = true;
 
+      $timeout(function(){
+        $scope.timeout = false;
+        $scope.afterTimeout = true;
+      }, 4000);
 
+$scope.toggleWeather = function(){
+  if ($scope.showWeather == true) {
+    $scope.showWeather = false;
+  } else {
+  $scope.showWeather = true;
+}
+}
+
+$scope.names=[];
+$scope.randomSearch = function(){
+  return $scope.names[Math.floor(Math.random() * 249)];
+}
+//console.log($scope.names);
 var tableData = [
 ];
 var newSearch = [];
@@ -32,7 +49,8 @@ $scope.getInfo = function(){
   .then(function(response){
       for (var i=0; i<response.length; i++){
           tableData.push([response[i].name, response[i].currencies[0]]);
-          }
+          $scope.names.push(response[i].name);  
+        }
 
       servy.getCurrency()
   .then(function(response){
@@ -61,12 +79,16 @@ angular.element(document).ready(function(){
       "order": [[ 2, "desc" ]]
     } );
     $('#table tbody').on('click', 'tr', function () {
-      console.log(this);
+      //console.log(this);
       newSearch.push(this.firstChild.textContent);
-      console.log(newSearch);
+      //console.log(newSearch);
       $scope.getData(newSearch);
       newSearch = [];
   } );
+
+
+  
+
 })
 
 })
@@ -83,6 +105,7 @@ $scope.getData = function(search) {
       servy.getData(search)
       
       .then(function(response){
+       // console.log(response);
 
             var dataObject = {
               country: response[0].name,
@@ -93,6 +116,19 @@ $scope.getData = function(search) {
               timezone: response[0].timezones[0]
             }
             $scope.data = dataObject;
+
+            servy.getWeather(response[0].latlng[0], response[0].latlng[1])
+
+            .then(function(response){
+              // $scope.showWeather = false;
+              //console.log(response);
+              $scope.weather = {
+                feelsLike: response.FeelsLikeF,
+                temp: response.temp_F,
+                description: response.weatherDesc[0].value,
+                pic: response.weatherIconUrl[0].value
+              }
+             // console.log($scope.weather);
 
             servy.getCurrency()
         
@@ -108,13 +144,14 @@ $scope.getData = function(search) {
                 if ($scope.total > 999){
                   $scope.total = $scope.total.toLocaleString();
                 }
+              
 
                 $scope.content = "<div class='words'>" +
                 $scope.data.country + "<br>" +
                 "Currency: " + $scope.data.currency + "<br>" + 
                 "1,000 USD = " + $scope.total + ' ' + $scope.data.currency + 
                 "</div>";
-      
+
 
         initMap($scope.data.lat,$scope.data.lng, $scope.content);
         });
@@ -122,14 +159,14 @@ $scope.getData = function(search) {
       });
 
       $scope.searchTerm = '';
-    }
+    })
     
  
 $scope.showTut = function(){
-  $scope.hide = false;
+  $scope.show = true;
 }
 $scope.closeTut = function(){
-  $scope.hide=true;
+  $scope.show = false;
 }
 $scope.showHelp = function(){
   $scope.hideHelpBox = false;
@@ -144,7 +181,8 @@ $scope.hideTable = function(){
   $scope.hideTableBox = true;
 }
 
-});
+
+};
 
 function initMap(lat, lng, content) {
 
@@ -262,7 +300,7 @@ function initMap(lat, lng, content) {
     {name: 'Styled Map'});
 
   var search = {lat: lat, lng: lng};
-  var center = {lat: lat, lng: lng + 25};
+  var center = {lat: lat, lng: lng + 35};
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
     center: center,
@@ -290,4 +328,5 @@ var infowindow = new google.maps.InfoWindow({
       infowindow.open(map, marker);
   });
 }
+})
 
